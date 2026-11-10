@@ -11,6 +11,11 @@
 - Результаты экспериментов отделяем от протоколов. Пустая запись без выполнения не является доказательством.
 - Не помещаем сюда приватные данные пилотных партнёров и не воспроизводим материалы, на которые нет прав.
 
+## Текущие гипотезы и планы экспериментов
+
+- [Operational ontology / digital model as PACT foundation](hypotheses/ontology-operational-value.md) — проверяемая альтернатива «единая операционная модель» vs «domain model + integrations + rules + UI», включая независимую симуляцию, data quality, evidence, контрольный домен УЗВ. **Статус: Hypothesis / planned experiment, не выполнен.**
+- [Предлагаемые границы RAT 1.0](../docs/product/rat-1.0-scope.md) и [RAT → MVP roadmap](../docs/product/mvp-roadmap.md) — продуктовый контекст, не подтверждённые результаты.
+
 ## Шаблоны
 
 - [Research note](templates/research-note.md) — вопросы, факты, критический анализ, гипотезы.
