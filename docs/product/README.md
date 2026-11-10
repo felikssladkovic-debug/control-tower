@@ -10,6 +10,8 @@
 - [RAT → MVP 1.0 → MVP 2.0](mvp-roadmap.md) — разделение проверки архитектурных гипотез, реального пилота и тиражирования; функции MVP 2.0 являются кандидатами, а не утверждённым backlog. **Proposed; реальные пилоты не подтверждены.**
 - [Гипотезы об операционной модели и план сравнения альтернатив](../../research/hypotheses/ontology-operational-value.md) — сравнение с традиционной domain model + integrations + rules + UI и контрпример УЗВ. **Hypothesis / planned experiment.**
 
+- [Video as contextual evidence](../../research/video-evidence/approaches.md) — **optional RAT demo**, короткие ~100×100 / ~3 FPS видеофрагменты из разрешённой записи вокруг известных событий; **без CV и распознавания действий**, не обязательное условие RAT/MVP. См. [feasibility protocol](../../research/video-evidence/feasibility-protocol.md).
+
 ## Принципы
 
 - Не путать **Vision**, **Hypothesis**, **Decision**, **Implementation** и evidence.
