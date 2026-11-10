@@ -37,7 +37,7 @@ PACT может повышать наглядность и объяснимос�
 
 **Технические ориентиры:**
 - FFmpeg позволяет выбирать временной фрагмент, уменьшать частоту кадров, масштабировать и отключать аудио — [документация FFmpeg](https://ffmpeg.org/ffmpeg.html) и [filters](https://ffmpeg.org/ffmpeg-filters.html). Важны кодек/таймстемпы/ключевые кадры, поэтому фактические границы нужно валидировать.
-- MediaMTX поддерживает записи и получение отрывков по времени через HTTP API — [playback](https://mediamtx.org/docs/usage/playback), [configuration](https://mediamtx.org/docs/references/configuration-file). Это **вариант для будущего исследования**, а не обязательная зависимость.
+- MediaMTX поддерживает записи и получение отрывков по времени через HTTP API — [playback](https://github.com/bluenviron/mediamtx/blob/main/docs/2-features/10-playback.md), [configuration](https://mediamtx.org/docs/references/configuration-file). Это **вариант для будущего исследования**, а не обязательная зависимость.
 - Простое хранение MP4-фрагментов вне PostgreSQL и метаданных/ссылок в модели — **кандидат**, не принятый выбор. Не создавать универсальное медиа-хранилище ради RAT.
 
 ## 4. Ограничения формата
