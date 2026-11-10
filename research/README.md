@@ -16,6 +16,8 @@
 - [Operational ontology / digital model as PACT foundation](hypotheses/ontology-operational-value.md) — проверяемая альтернатива «единая операционная модель» vs «domain model + integrations + rules + UI», включая независимую симуляцию, data quality, evidence, контрольный домен УЗВ. **Статус: Hypothesis / planned experiment, не выполнен.**
 - [Предлагаемые границы RAT 1.0](../docs/product/rat-1.0-scope.md) и [RAT → MVP roadmap](../docs/product/mvp-roadmap.md) — продуктовый контекст, не подтверждённые результаты.
 
+- [Video as contextual evidence — варианты и ограничения](video-evidence/approaches.md) и [optional feasibility protocol](video-evidence/feasibility-protocol.md) — короткое видео из архива по временному окну события (ориентир 100×100, 3 FPS), **без CV/action recognition**; необязательная демонстрационная функция RAT, не выполнена.
+
 ## Шаблоны
 
 - [Research note](templates/research-note.md) — вопросы, факты, критический анализ, гипотезы.
