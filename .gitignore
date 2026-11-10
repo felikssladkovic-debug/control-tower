@@ -1,0 +1,38 @@
+# Secrets / local config (examples may be committed)
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+id_rsa*
+
+# Editors / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Java / Maven
+target/
+*.class
+*.log
+
+# Node / Vite
+node_modules/
+dist/
+coverage/
+.vite/
+*.tsbuildinfo
+
+# Local runtime artifacts
+tmp/
+temp/
+*.pid
+
+# Keep lockfiles, Maven Wrapper and source SQL migrations tracked.
