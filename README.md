@@ -2,7 +2,7 @@
 
 Исследование и разработка платформы для моделирования, наблюдения и управления реальными бизнес-процессами.
 
-> **Статус:** Bootstrap v0.1 в работе. Реализованы технический Spring Boot backend без предметной логики и БД и Vue frontend shell без бизнес-данных; PostgreSQL, полный Compose, CI/CD, релизы и deployment **не реализованы**. Зеленая сборка не доказывает экономическую пользу продукта.
+> **Статус:** Bootstrap v0.1 в работе. Реализованы технический Spring Boot backend без предметной логики, подключение PostgreSQL/Flyway и Vue frontend shell без бизнес-данных; полный Compose с frontend, CI/CD, релизы и deployment **не реализованы**. Зеленая сборка не доказывает экономическую пользу продукта.
 
 ## Зачем мы создаём PACT
 
@@ -35,7 +35,7 @@
 
 ## Запуск
 
-Технический backend запускается через корневой `compose.yaml` с одним сервисом: `docker compose up --build -d`. Сборка выполняет Maven verification внутри Docker; установка Java или Maven на хосте не требуется. API доступен только через `127.0.0.1:8080`; команды и адреса описаны в [apps/backend/README.md](apps/backend/README.md). Frontend запускается отдельно через npm по [apps/frontend/README.md](apps/frontend/README.md). Это ещё не запуск полного продукта: PostgreSQL и интегрированный Compose появятся в отдельных Issues.
+Технический backend и PostgreSQL запускаются через корневой `compose.yaml` после заполнения локального `.env` по [.env.example](.env.example): `docker compose up --build -d`. Сборка образа пропускает тесты; `./mvnw verify` с Testcontainers следует запускать отдельно на машине с Java 21 и Docker. API доступен только через `127.0.0.1:8080`; команды и адреса описаны в [apps/backend/README.md](apps/backend/README.md). Frontend запускается отдельно через npm по [apps/frontend/README.md](apps/frontend/README.md). Интегрированный Compose с frontend относится к #5.
 
 Очередь Bootstrap v0.1:
 
