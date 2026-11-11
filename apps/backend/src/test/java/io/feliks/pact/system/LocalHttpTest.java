@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = PactApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("local")
-class LocalHttpTest {
+class LocalHttpTest extends PostgresTestDatabase {
 
     @LocalServerPort
     private int port;
