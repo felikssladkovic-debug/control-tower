@@ -1,0 +1,8 @@
+services:
+  backend:
+    build:
+      context: ./apps/backend
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+    ports:
+      - "127.0.0.1:8080:8080"
