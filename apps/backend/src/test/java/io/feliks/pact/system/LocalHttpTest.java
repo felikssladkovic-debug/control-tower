@@ -1,0 +1,57 @@
+package io.feliks.pact.system;
+
+import io.feliks.pact.bootstrap.PactApplication;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest(classes = PactApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("local")
+class LocalHttpTest {
+
+    @LocalServerPort
+    private int port;
+
+    private final HttpClient client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build();
+
+    @Test
+    void systemInfoReturnsOnlyNameAndMavenVersion() throws Exception {
+        var response = get("/api/system/info");
+
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(response.headers().firstValue("content-type").orElse("")).contains("application/json");
+        assertThat(response.body()).isEqualTo("{\"name\":\"PACT\",\"version\":\"0.1.0-SNAPSHOT\"}");
+    }
+
+    @Test
+    void healthProbesAreAvailableWithoutOtherActuatorEndpoints() throws Exception {
+        assertThat(get("/actuator/health/liveness").statusCode()).isEqualTo(200);
+        assertThat(get("/actuator/health/readiness").statusCode()).isEqualTo(200);
+        assertThat(get("/actuator/env").statusCode()).isEqualTo(404);
+    }
+
+    @Test
+    void localProfileServesOpenApiAndSwaggerUi() throws Exception {
+        var apiDocs = get("/v3/api-docs");
+        assertThat(apiDocs.statusCode()).isEqualTo(200);
+        assertThat(apiDocs.headers().firstValue("content-type").orElse("")).contains("application/json");
+        assertThat(apiDocs.body()).contains("\"openapi\"").contains("/api/system/info").contains("\"200\"");
+
+        var swagger = get("/swagger-ui.html");
+        assertThat(swagger.statusCode()).isEqualTo(200);
+        assertThat(swagger.body()).contains("Swagger UI");
+    }
+
+    private HttpResponse<String> get(String path) throws IOException, InterruptedException {
+        var request = HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + port + path)).GET().build();
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+}
