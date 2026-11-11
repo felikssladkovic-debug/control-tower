@@ -2,7 +2,7 @@
 
 Исследование и разработка платформы для моделирования, наблюдения и управления реальными бизнес-процессами.
 
-> **Статус:** Bootstrap v0.1 в работе. Реализован минимальный запускаемый Spring Boot backend без предметной логики и БД; frontend, PostgreSQL, полный Compose, CI/CD, релизы и deployment **не реализованы**. Зеленая сборка не доказывает экономическую пользу продукта.
+> **Статус:** Bootstrap v0.1 в работе. Реализованы технический Spring Boot backend без предметной логики и БД и Vue frontend shell без бизнес-данных; PostgreSQL, полный Compose, CI/CD, релизы и deployment **не реализованы**. Зеленая сборка не доказывает экономическую пользу продукта.
 
 ## Зачем мы создаём PACT
 
@@ -22,20 +22,20 @@
 | [docs/vision/](docs/vision/README.md) | Стратегическое видение и границы | Подготовлен индекс |
 | [docs/product/](docs/product/README.md) | Проблемы, сценарии, метрики пользы | Подготовлен индекс |
 | [docs/architecture/](docs/architecture/README.md) | Архитектура, ADR, компромиссы | Есть [ADR-0001](docs/architecture/adr/0001-bootstrap-stack.md) |
-| [apps/](apps/README.md) | Production-приложения | Есть технический backend; frontend планируется |
+| [apps/](apps/README.md) | Production-приложения | Есть технический backend и frontend shell |
 | [labs/](labs/README.md) | Исполняемые технические эксперименты | **Планируется**, кода нет |
 | [infra/](infra/README.md) | Конфигурация инфраструктуры и deploy | **Планируется**, конфигурации нет |
 | [docs/operations/](docs/operations/README.md) | Инструкции эксплуатации и evidence | **Планируется**, есть индекс |
 | [AGENTS.md](AGENTS.md) | Правила для Codex и других coding-агентов | Созданы |
 | [.github/pull_request_template.md](.github/pull_request_template.md) | Контрольный список PR | Создан |
 
-Папки `apps/frontend/`, `packages/` и `.github/workflows/` создаются, когда в них появятся реальные исходники, библиотеки или workflow. Отсутствие пустого каталога не означает отказ от него.
+Папки `packages/` и `.github/workflows/` создаются, когда в них появятся реальные библиотеки или workflow. Отсутствие пустого каталога не означает отказ от него.
 
 **Теги зрелости результатов:** `Vision` — стратегическая возможность; `Hypothesis` — проверяемое предположение; `Decision` — принятое и обоснованное решение; `Implementation` — реально сделанное и проверенное. Отдельно фиксируем степень достоверности данных.
 
 ## Запуск
 
-Технический backend запускается через корневой `compose.yaml` с одним сервисом: `docker compose up --build -d`. Сборка выполняет Maven verification внутри Docker; установка Java или Maven на хосте не требуется. API доступен только через `127.0.0.1:8080`; команды и адреса описаны в [apps/backend/README.md](apps/backend/README.md). Это ещё не запуск полного продукта: frontend и PostgreSQL появятся в отдельных Issues.
+Технический backend запускается через корневой `compose.yaml` с одним сервисом: `docker compose up --build -d`. Сборка выполняет Maven verification внутри Docker; установка Java или Maven на хосте не требуется. API доступен только через `127.0.0.1:8080`; команды и адреса описаны в [apps/backend/README.md](apps/backend/README.md). Frontend запускается отдельно через npm по [apps/frontend/README.md](apps/frontend/README.md). Это ещё не запуск полного продукта: PostgreSQL и интегрированный Compose появятся в отдельных Issues.
 
 Очередь Bootstrap v0.1:
 
