@@ -2,7 +2,7 @@
 
 Исследование и разработка платформы для моделирования, наблюдения и управления реальными бизнес-процессами.
 
-> **Статус:** Bootstrap v0.1 в работе. Реализованы технический Spring Boot backend без предметной логики, подключение PostgreSQL/Flyway и Vue frontend shell без бизнес-данных; полный Compose с frontend, CI/CD, релизы и deployment **не реализованы**. Зеленая сборка не доказывает экономическую пользу продукта.
+> **Статус:** Bootstrap v0.1 в работе. Реализованы технический Spring Boot backend без предметной логики, подключение PostgreSQL/Flyway, Vue frontend shell без бизнес-данных и локальный Compose integration stack. CI/CD, релизы и deployment **не реализованы**. Зеленая сборка не доказывает экономическую пользу продукта.
 
 ## Зачем мы создаём PACT
 
@@ -35,7 +35,9 @@
 
 ## Запуск
 
-Технический backend и PostgreSQL запускаются через корневой `compose.yaml` после заполнения локального `.env` по [.env.example](.env.example): `docker compose up --build -d`. Сборка образа пропускает тесты; `./mvnw verify` с Testcontainers следует запускать отдельно на машине с Java 21 и Docker. API доступен только через `127.0.0.1:8080`; команды и адреса описаны в [apps/backend/README.md](apps/backend/README.md). Frontend запускается отдельно через npm по [apps/frontend/README.md](apps/frontend/README.md). Интегрированный Compose с frontend относится к #5.
+Локальная первая версия PACT (Vue frontend, Spring Boot backend и PostgreSQL) запускается из корня через `docker compose up --build -d` после заполнения `.env` по [.env.example](.env.example). Единственная host-точка входа — <http://127.0.0.1:5606>; `/api/**` проходит через frontend reverse proxy. Backend и PostgreSQL не публикуют host-порты. Подробные команды, диагностика, dev override и правила сброса данных приведены в [локальной Compose-инструкции](docs/operations/local-compose.md).
+
+`compose.yaml` — локальный integration stack, а не production deployment; production release/deployment остаются задачами #7–#8. Сборка backend-образа пропускает тесты; `./mvnw verify` с Testcontainers следует запускать отдельно на машине с Java 21 и Docker.
 
 Очередь Bootstrap v0.1:
 
