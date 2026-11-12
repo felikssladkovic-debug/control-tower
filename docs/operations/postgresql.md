@@ -11,7 +11,7 @@
 ## Локальный запуск и диагностика
 
 1. Из корня репозитория скопировать `.env.example` в `.env`, заполнить все три пароля и запустить `docker compose config --quiet`.
-2. Выполнить `docker compose up --build -d` и проверить `docker compose ps`, `docker compose logs backend`, `http://127.0.0.1:8080/actuator/health/readiness`.
+2. Выполнить `docker compose up --build -d`, проверить `docker compose ps`, `docker compose logs backend` и `http://127.0.0.1:5606/api/system/info`. Readiness backend проверяется его внутренним Docker healthcheck и не публикуется на host.
 3. Для остановки без удаления данных выполнить `docker compose down`. Повторный `up` использует прежний volume и не применяет `V1` заново.
 
 PostgreSQL не публикует порт хоста. Доступ администратора локально возможен через `docker compose exec postgres psql -U postgres -d pact`. Не публикуйте содержимое `.env` и логи с секретами. Смена переменной пароля в `.env` не меняет пароль уже созданной роли: init-скрипт выполняется только при пустом volume. Для изменения существующей роли выполните управляемый `ALTER ROLE` в PostgreSQL и синхронно обновите секрет приложения. Удаление локальных тестовых данных: `docker compose down -v`; эта команда необратимо удаляет локальный volume PostgreSQL.

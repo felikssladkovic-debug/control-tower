@@ -1,6 +1,6 @@
 # PACT backend
 
-Технический Spring Boot backend для Bootstrap v0.1. Один Maven-проект и один запускаемый JAR. PostgreSQL подключён через JDBC и Flyway; предметной модели и бизнес-данных нет. Полный Compose с frontend относится к [#5](https://github.com/felikssladkovic-debug/control-tower/issues/5).
+Технический Spring Boot backend для Bootstrap v0.1. Один Maven-проект и один запускаемый JAR. PostgreSQL подключён через JDBC и Flyway; предметной модели и бизнес-данных нет. Локальный Compose integration stack реализован в [#5](https://github.com/felikssladkovic-debug/control-tower/issues/5).
 
 ## Запуск и проверка через Docker
 
@@ -18,17 +18,9 @@ docker compose down
 
 Compose запускает PostgreSQL 17.11 (образ `postgres:17.11-trixie`) с постоянным томом и backend только после healthcheck БД. Для `docker compose up` на хосте достаточно Docker; Java и Maven не нужны. Docker build собирает JAR с `-DskipTests`: успешная сборка образа **не подтверждает** интеграционные тесты. Для полной проверки нужен Java 21, Docker daemon и команда `cd apps/backend && ./mvnw verify`; она запускает PostgreSQL через Testcontainers. После изменений исходников повторите `docker compose up --build -d`.
 
-Compose запускает backend с профилем `local` и публикует порт **только на `127.0.0.1:8080`**. Проверить ответы можно браузером или уже установленным HTTP-клиентом:
+В обычном Compose backend не публикует host-порт. Внешний доступен только `GET /api/system/info` через <http://127.0.0.1:5606>; Actuator, OpenAPI JSON и Swagger UI остаются внутри Compose. Docker healthcheck обращается к `GET /actuator/health/readiness` из backend-контейнера. Для разработки с Vite используйте явный override `compose.dev.yaml`, который привязывает backend только к `127.0.0.1:8086`; подробности приведены в [локальной Compose-инструкции](../../docs/operations/local-compose.md).
 
-| Адрес | Назначение |
-| --- | --- |
-| <http://127.0.0.1:8080/api/system/info> | Имя `PACT` и версия Maven-проекта, начиная с `0.1.0-SNAPSHOT` |
-| <http://127.0.0.1:8080/actuator/health/liveness> | Состояние процесса |
-| <http://127.0.0.1:8080/actuator/health/readiness> | Готовность принимать запросы |
-| <http://127.0.0.1:8080/v3/api-docs> | OpenAPI JSON в `local`/`test` |
-| <http://127.0.0.1:8080/swagger-ui.html> | Swagger UI в `local`/`test` |
-
-`/api/system/info` возвращает только `name` и `version`. Ответ HTTP 200 показывает, что этот API доступен; состояние здоровья следует проверять через Actuator. Readiness выполняет проверку соединения с PostgreSQL под ролью приложения; при потере БД возвращает HTTP 503. Liveness не зависит от БД. Если БД недоступна при старте, приложение не запускается. Наружу опубликован только Actuator `health`, без `env`, `configprops` и других диагностических endpoint. OpenAPI JSON и Swagger UI отключены в профиле `prod`.
+`/api/system/info` возвращает только `name` и `version`. Ответ HTTP 200 показывает, что этот API доступен; состояние здоровья следует проверять через Actuator. Readiness выполняет проверку соединения с PostgreSQL под ролью приложения; при потере БД возвращает HTTP 503. Liveness не зависит от БД. Если БД недоступна при старте, приложение не запускается. Из Actuator в профиле `local` доступен только `health`, без `env`, `configprops` и других диагностических endpoint; при обычном Compose он не проксируется на host. OpenAPI JSON и Swagger UI отключены в профиле `prod`.
 
 Неизвестный путь возвращает стандартный HTTP 404; непредвиденная ошибка сервера — HTTP 500. Собственный формат ошибок в #2 не вводится.
 

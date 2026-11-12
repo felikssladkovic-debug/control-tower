@@ -8,6 +8,9 @@ RUN --mount=type=cache,target=/root/.m2 chmod +x mvnw && ./mvnw -B -ntp -DskipTe
 
 FROM eclipse-temurin:21-jre AS runtime
 WORKDIR /app
+RUN apt-get update \
+    && apt-get install --no-install-recommends --yes curl \
+    && rm -rf /var/lib/apt/lists/*
 COPY --from=build --chown=10001:10001 /workspace/target/pact-backend-*.jar app.jar
 USER 10001:10001
 EXPOSE 8080
