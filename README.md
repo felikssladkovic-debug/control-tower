@@ -21,11 +21,11 @@
 | [research/](research/README.md) | Источники, сравнения, гипотезы, эксперименты | Подготовлены правила и шаблоны |
 | [docs/vision/](docs/vision/README.md) | Стратегическое видение и границы | Подготовлен индекс |
 | [docs/product/](docs/product/README.md) | Проблемы, сценарии, метрики пользы | Подготовлен индекс |
-| [docs/architecture/](docs/architecture/README.md) | Архитектура, ADR, компромиссы | Есть [ADR-0001](docs/architecture/adr/0001-bootstrap-stack.md) |
+| [docs/architecture/](docs/architecture/README.md) | Архитектура, ADR, компромиссы | [ADR-0001](docs/architecture/adr/0001-bootstrap-stack.md) (стек) и [ADR-0002](docs/architecture/adr/0002-sdlc-delivery-pipeline.md) (SDLC delivery; реализация ожидается) |
 | [apps/](apps/README.md) | Production-приложения | Есть технический backend и frontend shell |
 | [labs/](labs/README.md) | Исполняемые технические эксперименты | **Планируется**, кода нет |
 | [infra/](infra/README.md) | Конфигурация инфраструктуры и deploy | **Планируется**, конфигурации нет |
-| [docs/operations/](docs/operations/README.md) | Инструкции эксплуатации и evidence | **Планируется**, есть индекс |
+| [docs/operations/](docs/operations/README.md) | Инструкции эксплуатации и evidence | Локальный Compose, [ubuntu-dev](docs/operations/development.md), [staging deployment](docs/operations/staging-deployment.md) (последний пока план) |
 | [AGENTS.md](AGENTS.md) | Правила для Codex и других coding-агентов | Созданы |
 | [.github/pull_request_template.md](.github/pull_request_template.md) | Контрольный список PR | Создан |
 
@@ -44,7 +44,7 @@
 1. [#1 — Структура, документы, AGENTS.md](https://github.com/felikssladkovic-debug/control-tower/issues/1)
 2. [#2 — Spring Boot backend](https://github.com/felikssladkovic-debug/control-tower/issues/2) и [#3 — Vue workspace](https://github.com/felikssladkovic-debug/control-tower/issues/3)
 3. [#4 — PostgreSQL / Flyway](https://github.com/felikssladkovic-debug/control-tower/issues/4), [#5 — Docker Compose](https://github.com/felikssladkovic-debug/control-tower/issues/5)
-4. [#6 — path-aware CI](https://github.com/felikssladkovic-debug/control-tower/issues/6), [#7 — Release](https://github.com/felikssladkovic-debug/control-tower/issues/7), [#8 — Deploy](https://github.com/felikssladkovic-debug/control-tower/issues/8), [#9 — Verification](https://github.com/felikssladkovic-debug/control-tower/issues/9)
+4. [#19 — ubuntu-dev / Codex](https://github.com/felikssladkovic-debug/control-tower/issues/19), [#20 — Playwright](https://github.com/felikssladkovic-debug/control-tower/issues/20), [#6 — CI](https://github.com/felikssladkovic-debug/control-tower/issues/6), [#7 — Release](https://github.com/felikssladkovic-debug/control-tower/issues/7), [#8 — ubuntu-staging Deploy](https://github.com/felikssladkovic-debug/control-tower/issues/8), [#9 — Verification](https://github.com/felikssladkovic-debug/control-tower/issues/9)
 
 ## Как участвовать
 
